@@ -26,7 +26,7 @@ const Signin = () => {
 
   // function to signup user
 
-  const handleSignup = async(e) => {
+  const handleSignIn = async(e) => {
 
     // prevent the normal behavior of fomms -> to refresh the page unnecessarily on the click of button
     e.preventDefault()
@@ -36,18 +36,21 @@ const Signin = () => {
       setLoading(true);
       setError(null)
 
-      const res = await axios.post("http://localhost:4000/api/register", 
+      const res = await axios.post("http://localhost:4000/api/signin", 
         // state variables(req.body)
         {
           email, password
+        },
+        {
+          withCredentials : true
         }
       );
 
       console.log("response from the signup api",res.data.message)
 
-      // redirecting to signin on successful signup
+      // redirecting to home route on successful signin
       if(res.data.user){
-        navigate("/signin")
+        navigate("/")
       }
 
       // storing the error message from backend response
@@ -70,7 +73,7 @@ const Signin = () => {
     <div className="flex justify-center gap-30 items-center min-h-screen">
       {/* Signup Form */}
       <div>
-        <form onSubmit={handleSignup} className="flex flex-col gap-3 border-2 border-black p-16 rounded-lg">
+        <form onSubmit={handleSignIn} className="flex flex-col gap-3 border-2 border-black p-16 rounded-lg">
           <h1 className="text-xl font-semibold text-center">Sign In</h1>
 
 
