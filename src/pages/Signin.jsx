@@ -1,10 +1,16 @@
 import React, {useState} from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+// import action
+import { loginSuccessful } from "../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
 import axios from "axios"
 
 // all hooks in react start with "use"
 
 const Signin = () => {
+
+  // dispatch
+  const dispatch = useDispatch();
 
   // state for input fields
 
@@ -50,7 +56,12 @@ const Signin = () => {
 
       // redirecting to home route on successful signin
       if(res.data.user){
-        navigate("/")
+        // dispatch -> action -> (data to work on)
+        /*
+          {username : "abc", email : "abc@gmail.com", password : 123}
+        */
+        dispatch(loginSuccessful(res.data.user))
+        // navigate("/")
       }
 
       // storing the error message from backend response
