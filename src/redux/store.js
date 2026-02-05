@@ -1,16 +1,24 @@
 // Redux Global Store
 
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import userReducer from "./slices/userSlice"
+import userReducer from "./slices/userSlice";
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
 const rootReducer = combineReducers({
     user : userReducer
 })
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 // code for creating and exporting store using configureStore
 export const store = configureStore({
     // reducers
-  reducer: rootReducer,
+  reducer: persistedReducer,
   // middleware 
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -20,5 +28,7 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
 });
 
+// export persistor
+export const persistor = persistStore(store);
 
 

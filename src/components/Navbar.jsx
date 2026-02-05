@@ -17,7 +17,7 @@ const Navbar = () => {
           alt="user_profile"
         />
 
-        <span>{currentUser.email}</span>
+        <span>{currentUser?.email}</span>
       </div>
 
       {/* search bar */}

@@ -61,7 +61,7 @@ const Signin = () => {
           {username : "abc", email : "abc@gmail.com", password : 123}
         */
         dispatch(loginSuccessful(res.data.user))
-        // navigate("/")
+        navigate("/")
       }
 
       // storing the error message from backend response
