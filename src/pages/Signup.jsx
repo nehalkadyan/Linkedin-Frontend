@@ -23,7 +23,6 @@ const Signup = () => {
   console.log("email", email)
   console.log("password", password)
 
-
     const navigate = useNavigate()
 
   // function to signup user
@@ -34,7 +33,6 @@ const Signup = () => {
     e.preventDefault()
 
     try{
-
       setLoading(true);
       setError(null)
 

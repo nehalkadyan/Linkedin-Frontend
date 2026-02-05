@@ -3,10 +3,12 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import Signup from "./pages/Signup"
 import Signin from "./pages/Signin"
 import HomePage from "./pages/HomePage"
+import Navbar from "./components/Navbar"
 
 function App() {
   return (
     <Router>
+      <Navbar />
         {/* routes */}
        <Routes>
         {/* inidvidual routes */}
@@ -14,6 +16,8 @@ function App() {
           <Route path="/signin" element= {<Signin />}/>
           <Route path = "/" element = {<HomePage />}/>
        </Routes>
+
+       {/* footer */}
     </Router>
   )
 }
