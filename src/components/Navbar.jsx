@@ -1,8 +1,12 @@
 import React from "react";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { useSelector } from "react-redux";
 
 
 const Navbar = () => {
+  // destructuring current user from user in state
+  const {currentUser} = useSelector((state) => state.user)
+
   return (
     <div className="h-20 bg-blue-500 flex justify-between px-20 items-center">
       {/* user image */}
@@ -12,6 +16,8 @@ const Navbar = () => {
           src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
           alt="user_profile"
         />
+
+        <span>{currentUser.email}</span>
       </div>
 
       {/* search bar */}
