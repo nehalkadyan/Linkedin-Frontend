@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
 import axios from 'axios';
-import { set } from 'mongoose';
 
 const Profile = () => {
   // state variables for form fields
@@ -28,7 +27,7 @@ const Profile = () => {
       e.preventDefault();
       // api call to update profile
 
-     const response = await axios.post("http://localhost:4000/api/create-profile",
+     const response = await axios.post("https://linkedin-backend-six.vercel.app/api/create-profile",
       // req.body
         {headline, userId: currentUser._id, summary,
           experience : {
