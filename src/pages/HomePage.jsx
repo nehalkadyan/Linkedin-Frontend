@@ -7,12 +7,12 @@ const HomePage = () => {
   return (
     <div className='flex justify-center gap-30'>
       {/* left section */}
-      <div>
+      <div className='mt-10'>
         <ProfileSection />
       </div>
 
        {/* right section */}
-      <div>
+      <div className='mt-10'>
          <CreatePost />
          <Feed />
       </div>
