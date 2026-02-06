@@ -2,22 +2,23 @@ import React from "react";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
-
 const Navbar = () => {
   // destructuring current user from user in state
-  const {currentUser} = useSelector((state) => state.user)
+  const { currentUser } = useSelector((state) => state.user);
 
   return (
     <div className="h-20 bg-blue-500 flex justify-between px-20 items-center">
       {/* user image */}
-      <div>
+      <div className="flex items-center gap-2">
         <img
           className="w-20"
           src="https://www.pngall.com/wp-content/uploads/5/User-Profile-PNG-Image.png"
           alt="user_profile"
         />
-
-        <span>{currentUser?.email}</span>
+        
+        <div>
+          <p className="text-white font-semibold">{currentUser?.email}</p>
+        </div>
       </div>
 
       {/* search bar */}
@@ -32,9 +33,8 @@ const Navbar = () => {
 
       {/* linkedin logo */}
       <div className="flex items-center gap-6">
-
         <div>
-            <IoNotificationsOutline className="text-white font-semibold cursor-pointer text-3xl" />
+          <IoNotificationsOutline className="text-white font-semibold cursor-pointer text-3xl" />
         </div>
 
         <div>
