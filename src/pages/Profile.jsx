@@ -3,6 +3,22 @@ import {useSelector} from 'react-redux'
 
 const Profile = () => {
 
+
+  // state variables for form fields
+
+  const [headline, setHeadline] = useState("")
+  const [summary, setSummary] = useState("")
+
+  const [companyName, setCompanyName] = useState("")
+  const [joiningDate, setJoiningDate] = useState("")
+  const [lastDate, setLastDate] = useState("")
+  const [description, setDescription] = useState("")
+
+  // const [skills, setSkills] = useState([])
+
+  const [schoolName, setSchoolName] = useState("")
+  const [session, setSession] = useState("")
+
   // currentUser
 
   const {currentUser} = useSelector((state) => state.user)
@@ -13,30 +29,32 @@ const Profile = () => {
 
 
 <div className='flex justify-center items-center'>
-      <form className='flex flex-col gap-4 mt-8'>
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='headline'/>
+      <form className='flex flex-col gap-4 mt-8 border-2 border-gray-800 rounded-2xl py-30 px-60'>
 
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='summary'/>
+        <h1 className='text-2xl font-semibold'>Update Profile</h1>
+        <input onChange={(e) => setHeadline(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='headline'/>
+
+        <input onChange={(e) => setSummary(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='summary'/>
 
         {/* Experience -> 4 fields */}
 
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='company'/>
+        <input onChange={(e) => setCompanyName(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='company'/>
 
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='joining date'/>
+        <input onChange={(e) => setJoiningDate(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='joining date'/>
 
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg'   type="text" placeholder='Last date'/>
+        <input onChange={(e) => setLastDate(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg'   type="text" placeholder='Last date'/>
 
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='description'/>
+        <input onChange={(e) => setDescription(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='description'/>
 
         {/* skills */}
 
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='skills'/>
+        {/* <input onChange={(e) => setSkills(e.target.value.split(","))} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='skills'/> */}
 
         {/* Education -> 4 fields */}
 
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg'   type="text" placeholder='School Name'/>
+        <input onChange={(e) => setSchoolName(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg'   type="text" placeholder='School Name'/>
 
-        <input className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='session'/>
+        <input onChange={(e) => setSession(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='session'/>
 
         <button className='p-4 text-lg bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600'>Save</button>
 
