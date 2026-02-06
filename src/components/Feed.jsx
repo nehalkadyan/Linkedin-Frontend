@@ -26,7 +26,7 @@ const Feed = () => {
       <h1 className="text-3xl text-gray-600 my-12"> Feed</h1>
       <ul className="mt-10 flex flex-col gap-6">
         {posts.map((post, idx) => (
-          <div className=" flex flex-col gap-4 w-96 border-2 border-black p-4 rounded-lg">
+          <div keyn = {idx} className=" flex flex-col gap-4 w-96 border-2 border-black p-4 rounded-lg">
             <li className="text-xs text-gray-600">
               Posted By : {post.author.username}
             </li>
