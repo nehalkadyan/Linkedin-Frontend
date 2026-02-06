@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
+import axios from 'axios';
+import { set } from 'mongoose';
 
 const Profile = () => {
   // state variables for form fields
@@ -27,6 +29,7 @@ const Profile = () => {
       // api call to update profile
 
      const response = await axios.post("http://localhost:4000/api/create-profile",
+      // req.body
         {headline, userId: currentUser._id, summary,
           experience : {
             companyName, joiningDate, lastDate, description
@@ -34,11 +37,18 @@ const Profile = () => {
           education : {
             schoolName, session
           },
-          
         }
      );
       console.log("response", response);
       if(response.data.profile){
+        setHeadline("");
+        setSummary("");
+        setCompanyName("");
+        setJoiningDate("");
+        setLastDate("");
+        setDescription("");
+        setSchoolName("");
+        setSession("");
         return alert("Profile updated successfully")
       }
     }catch(err){
@@ -53,22 +63,23 @@ const Profile = () => {
 
 
 <div className='flex justify-center items-center'>
-      <form className='flex flex-col gap-4 mt-8 border-2 border-gray-800 rounded-2xl py-30 px-60'>
+
+      <form onSubmit={handleUpdateProfile} className='flex flex-col gap-4 mt-8 border-2 border-gray-800 rounded-2xl py-30 px-60'>
 
         <h1 className='text-2xl font-semibold'>Update Profile</h1>
-        <input onChange={(e) => setHeadline(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='headline'/>
+        <input value={headline} onChange={(e) => setHeadline(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='headline'/>
 
-        <input onChange={(e) => setSummary(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='summary'/>
+        <input value={summary} onChange={(e) => setSummary(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='summary'/>
 
         {/* Experience -> 4 fields */}
 
-        <input onChange={(e) => setCompanyName(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='company'/>
+        <input value={companyName} onChange={(e) => setCompanyName(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='company'/>
 
-        <input onChange={(e) => setJoiningDate(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='joining date'/>
+        <input value={joiningDate} onChange={(e) => setJoiningDate(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='joining date'/>
 
-        <input onChange={(e) => setLastDate(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg'   type="text" placeholder='Last date'/>
+        <input value={lastDate} onChange={(e) => setLastDate(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg'   type="text" placeholder='Last date'/>
 
-        <input onChange={(e) => setDescription(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='description'/>
+        <input value={description}   onChange={(e) => setDescription(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='description'/>
 
         {/* skills */}
 
@@ -76,11 +87,11 @@ const Profile = () => {
 
         {/* Education -> 4 fields */}
 
-        <input onChange={(e) => setSchoolName(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg'   type="text" placeholder='School Name'/>
+        <input value={schoolName} onChange={(e) => setSchoolName(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg'   type="text" placeholder='School Name'/>
 
-        <input onChange={(e) => setSession(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='session'/>
+        <input value={session} onChange={(e) => setSession(e.target.value)} className='p-4 text-lg border-2 border-black outline-none rounded-lg' type="text" placeholder='session'/>
 
-        <button className='p-4 text-lg bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600'>Save</button>
+        <button type='submit' className='p-4 text-lg bg-blue-500 text-white rounded-lg cursor-pointer hover:bg-blue-600'>Save</button>
 
       </form>
       </div>
