@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 import {useSelector} from 'react-redux'
 
 const Profile = () => {
-
-
   // state variables for form fields
 
   const [headline, setHeadline] = useState("")
@@ -21,7 +19,33 @@ const Profile = () => {
 
   // currentUser
 
-  const {currentUser} = useSelector((state) => state.user)
+  const {currentUser} = useSelector((state) => state.user);
+
+  const handleUpdateProfile = async(e) => {
+    try{
+      e.preventDefault();
+      // api call to update profile
+
+     const response = await axios.post("http://localhost:4000/api/create-profile",
+        {headline, userId: currentUser._id, summary,
+          experience : {
+            companyName, joiningDate, lastDate, description
+          },
+          education : {
+            schoolName, session
+          },
+          
+        }
+     );
+      console.log("response", response);
+      if(response.data.profile){
+        return alert("Profile updated successfully")
+      }
+    }catch(err){
+      console.log("err", err);
+    }
+  }
+
 
   return (
     <div >
