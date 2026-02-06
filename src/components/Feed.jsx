@@ -24,7 +24,19 @@ const Feed = () => {
 
   return (
     <div>
-      <h1>LinkedIN Feed</h1>
+      <h1 className='text-3xl text-gray-600 my-12'> Feed</h1>
+      <ul className='mt-10'>
+        {
+          posts.map((post, idx) => (
+            <div>
+                  <li>Posted By : {post.author}</li>
+                 <li key={idx}>{post.content}</li>
+                 <li>Likes : {post.likes.length}</li>
+                 <li>Comments: {post.numberOfComments}</li>
+            </div>
+          ))
+        }
+      </ul>
     </div>
   )
 }
