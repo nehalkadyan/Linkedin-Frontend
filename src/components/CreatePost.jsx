@@ -33,6 +33,8 @@ const CreatePost = () => {
       );
       // alert message on successful post creation
       if (response.data.post) {
+        setContent("");
+        setIsSendButtonEnabled(false);
         return alert("post created successfully");
       }
     } catch (err) {
@@ -47,6 +49,7 @@ const CreatePost = () => {
           type="text"
           placeholder="What's on your mind?"
           className="p-4 text-2xl  outline-none"
+          value = {content}
           onChange={(e) => setContent(e.target.value)}
         />
         {/* create post icon */}
