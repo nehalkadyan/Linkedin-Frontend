@@ -1,14 +1,44 @@
 import React, { useState } from "react";
 import { FaPen } from "react-icons/fa";
 import { IoIosSend } from "react-icons/io";
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const CreatePost = () => {
+  // get currentUser value
+
+  const { currentUser } = useSelector((state) => state.user);
+
   // state variable for post content
   const [content, setContent] = useState("");
   console.log("content", content);
 
   const [isSendButtonEnabled, setIsSendButtonEnabled] = useState(false);
   // isSendButtonEnabled = false
+
+  // handle send post
+
+  const handleSendPost = async () => {
+    try {
+      if (content === "") {
+        return alert("Kindly fill something to post!");
+      }
+      const response = await axios.post(
+        "http://localhost:4000/api/create-post",
+        // body
+        {
+          content,
+          author: currentUser?._id,
+        },
+      );
+      // alert message on successful post creation
+      if (response.data.post) {
+        return alert("post created successfully");
+      }
+    } catch (err) {
+      console.log("err", err.message);
+    }
+  };
 
   return (
     <div>
@@ -21,7 +51,7 @@ const CreatePost = () => {
         />
         {/* create post icon */}
         <div>
-            {/* if false then show pen icon */}
+          {/* if false then show pen icon */}
           {!isSendButtonEnabled && (
             <FaPen
               onClick={() => setIsSendButtonEnabled(true)}
@@ -31,7 +61,12 @@ const CreatePost = () => {
 
           {
             // is isSendButtonEnabled = true then only show send icon
-            isSendButtonEnabled && <IoIosSend className="text-4xl cursor-pointer" />
+            isSendButtonEnabled && (
+              <IoIosSend
+                onClick={handleSendPost}
+                className="text-4xl cursor-pointer"
+              />
+            )
           }
         </div>
       </div>
